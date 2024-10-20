@@ -1,5 +1,5 @@
 #01 - Global Vars
-location  = "brazilsouth"
+location  = "eastus"
 cx_prefix = "tftec"
 global_tags = {
   ambiente    = "ao vivo sao paulo 2024"
@@ -14,9 +14,9 @@ analytics_resource_group_name = "analytics"
 
 
 #03 - VNET Vars
-vnet_name                = "vnet-spoke-live-brazilsouth-001"
-vnet_resource_group_name = "rg-tftec-network-live"
-snet_name                = "snet-aks-brazilsouth-001"
+vnet_name                = "vnet-web"
+vnet_resource_group_name = "rg-tftecsp-dev"
+snet_name                = "sub-aks01"
 
 
 #04 - AKS Vars
