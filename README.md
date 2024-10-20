@@ -1,20 +1,112 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+<p align="center">
+<img src="assets/images/unicast_logo.png">
+</p>
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+This repository is part of the presentation **"TFTEC AO VIVO EM SÃO PAULO 2024"**. For more information about the event, please visit [**here**](https://www.tftec.com.br/tftecaovivo-2024/).
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+# Pre-requisites
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+1. Azure Cloud Subscription
+2. Course Github Repositories
+3. Azure CLI
+4. Terraform
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Step-01: Azure Cloud Subscription
+
+- [Azure Free Account](https://azure.microsoft.com/en-in/free/)
+- 200 dollar credit for first 30 days
+
+## Step-02: Fork Course Github Repositories
+
+- [Azure Kubernetes Service with Azure DevOps and Terraform](https://github.com/asilvajunior/tftec-terraform-aovivo-24)
+
+>NOTE: If you do not have Azure CLI and Terraform installed on your machine, follow these steps:
+
+## Step-03: Install Tools
+
+**Linux Way**
+
+1 - Install Azure CLI
+
+```bash
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+```
+
+2 - Install Terraform
+
+```bash
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+```
+
+3 - Verify the installations
+
+```bash
+az version
+terraform version
+````
+
+--- 
+
+**Windows Way**
+
+1 - Install Azure CLI (Download and install)
+
+```
+https://learn.microsoft.com/pt-br/cli/azure/install-azure-cli
+```
+
+2 - Install Terraform (Chocolatey)
+Install Chocolatey (if it is not already installed). Open PowerShell as Administrator and run the command:
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+``` 
+
+Install Terraform with Chocolatey:
+
+```powershell
+choco install terraform -y
+```
+
+3 - Verify the installations
+
+```powershell
+az version
+terraform version
+```
+
+---
+
+**Mac Way**
+
+1 - Install Brew (if it is not already installed)
+Open terminal and run the command:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+````
+
+2 - Install Azure CLI
+
+```bash
+brew update && brew install azure-cli
+```
+
+2 - Install Terraform
+
+```bash
+brew install terraform
+```
+
+```bash
+az version
+terraform version
+````
+
+---
+
+- **Important Note:** Please access this repository and FORK it and use them during the course.
+
+## :memo: License
+
+This project is under [MIT License](./LICENSE).
