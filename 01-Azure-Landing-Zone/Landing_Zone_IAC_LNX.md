@@ -44,7 +44,7 @@ export KEY_VAULT_NAME=kv-tftecaovivo24
 export ARM_TENANT_ID=cab1ba99-21e0-4a40-8f98-aef71b9b0f80
 ```
 
-### Access key from storage account backend Terraform
+### Access key from storage account backend Terraform (After you have already created the storage!)
 ```bash
 export ACCESS_KEY=$(az storage account keys list --resource-group $TF_BACKEND_RESOURCE_GROUP --account-name $TF_BACKEND_STORAGE_ACCOUNT --query "[0].value" --output tsv)
 ```
