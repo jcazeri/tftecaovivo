@@ -6,7 +6,7 @@
 
 ### The target azure subscription
 ```bash
-export ARM_SUBSCRIPTION_ID=
+export ARM_SUBSCRIPTION_ID=b9ce8dd6-e2f1-4f90-84a2-c4915fc609ec
 ```
 
 ### The name of the resource group where the storage account for the backend should be created
@@ -16,12 +16,12 @@ export TF_BACKEND_RESOURCE_GROUP=rg-tftec-terraform-tfstate
 
 ### The region where the resource group for the backend should be created
 ```bash
-export TF_BACKEND_LOCATION=brazilsouth
+export TF_BACKEND_LOCATION=eastus
 ```
 
 ### The name of the storage account for the backend
 ```bash 
-export TF_BACKEND_STORAGE_ACCOUNT=tftec24aovivo
+export TF_BACKEND_STORAGE_ACCOUNT=tftec24aovivosp
 ```
 
 ### The name of the storage account container for the backend
@@ -36,12 +36,12 @@ export TF_BACKEND_KEY=tfstate
 
 ### Key vault name
 ```bash
-export KEY_VAULT_NAME=kv-tftec24aovivo
+export KEY_VAULT_NAME=kv-tftecaovivo24
 ```
 
 ### Tenant ID
 ```bash
-export ARM_TENANT_ID=49395d14-0a8b-4fec-a4ff-05f54c7213b7
+export ARM_TENANT_ID=cab1ba99-21e0-4a40-8f98-aef71b9b0f80
 ```
 
 ### Access key from storage account backend Terraform
@@ -78,12 +78,7 @@ az storage container create --name $TF_BACKEND_CONTAINER --account-name $TF_BACK
 az keyvault create --name $KEY_VAULT_NAME --resource-group $TF_BACKEND_RESOURCE_GROUP --location $TF_BACKEND_LOCATION --enable-rbac-authorization false
 ```
 
-### 6. Ensure access to the key vault
-```bash
-az keyvault set-policy --name $KEY_VAULT_NAME --object-id $ARM_CLIENT_ID --secret-permissions get list --key-permissions get list --certificate-permissions get list
-```
-
-### 7. Create secrets for all environment variables in the key vault
+### 6. Create secrets for all environment variables in the key vault
 ```bash
 az keyvault secret set --vault-name $KEY_VAULT_NAME --name "TF-BACKEND-STORAGE-ACCOUNT" --value $TF_BACKEND_STORAGE_ACCOUNT
 az keyvault secret set --vault-name $KEY_VAULT_NAME --name "TF-BACKEND-KEY" --value $TF_BACKEND_KEY
@@ -93,7 +88,7 @@ az keyvault secret set --vault-name $KEY_VAULT_NAME --name "TF-BACKEND-RESOURCE-
 az keyvault secret set --vault-name $KEY_VAULT_NAME --name "TF-BACKEND-CONTAINER" --value $TF_BACKEND_CONTAINER
 ```
 
-### 8. Terraform initialization with backend configuration
+### 7. Terraform initialization with backend configuration
 ```bash
 terraform init -reconfigure \
   -backend-config "resource_group_name=$TF_BACKEND_RESOURCE_GROUP" \

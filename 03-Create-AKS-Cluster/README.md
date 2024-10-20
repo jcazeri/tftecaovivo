@@ -20,5 +20,3 @@ After that, make sure to make the necessary changes to the variables file to be 
 ## :memo: License
 
 This project is under [MIT License](./LICENSE).
-
-
