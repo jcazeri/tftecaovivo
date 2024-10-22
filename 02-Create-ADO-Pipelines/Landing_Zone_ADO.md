@@ -35,6 +35,6 @@ https://marketplace.visualstudio.com/items?itemName=JasonBJohnson.azure-pipeline
 
 Install the extension in your project, click **Get it free** > select the Azure DevOps organization and install it.
 
-### 6. Create the infrastructure deployment pipeline with Terraform.
+### 7. Create the infrastructure deployment pipeline with Terraform.
 
 Pipelines > New pipeline > Azure Repos Git > <repo_name> > Existing Azure Pipelines YAML file > Branch main > path **/02-Create-ADO-Pipelines/cicd/deploy-infra.yml** > continue > save.
