@@ -27,34 +27,34 @@ data "azurerm_subnet" "existing_subnet" {
 
 # Azure AD Group in Active Directory for AKS Admins
 
-data "azuread_client_config" "existing" {
-}
+#data "azuread_client_config" "existing" {
+#}
 
-resource "azuread_group" "aks_administrators" {
-  display_name            = "${var.aks_resource_group_name}-cluster-administrators"
-  owners                  = [data.azuread_client_config.existing.object_id]
-  security_enabled        = true
-  prevent_duplicate_names = true
-  description             = "Azure AKS Kubernetes administrators for the ${var.aks_resource_group_name}-cluster."
-
-  depends_on = [
-    azurerm_resource_group.aks_rg
-  ]
-}
-
-data "azurerm_subscription" "principal" {
-}
-
-resource "azurerm_role_assignment" "aks_administrators" {
-  scope                = data.azurerm_subscription.principal.id
-  role_definition_name = "Contributor"
-  principal_id         = azuread_group.aks_administrators.object_id
-
-  depends_on = [
-    azurerm_resource_group.aks_rg,
-    azuread_group.aks_administrators
-  ]
-}
+#resource "azuread_group" "aks_administrators" {
+#  display_name            = "${var.aks_resource_group_name}-cluster-administrators"
+#  owners                  = [data.azuread_client_config.existing.object_id]
+#  security_enabled        = true
+#  prevent_duplicate_names = true
+#  description             = "Azure AKS Kubernetes administrators for the ${var.aks_resource_group_name}-cluster."
+#
+#  depends_on = [
+#    azurerm_resource_group.aks_rg
+#  ]
+#}
+#
+#data "azurerm_subscription" "principal" {
+#}
+#
+#resource "azurerm_role_assignment" "aks_administrators" {
+#  scope                = data.azurerm_subscription.principal.id
+#  role_definition_name = "Contributor"
+#  principal_id         = azuread_group.aks_administrators.object_id
+#
+#  depends_on = [
+#    azurerm_resource_group.aks_rg,
+#    azuread_group.aks_administrators
+#  ]
+#}
 
 # Terraform Modules
 

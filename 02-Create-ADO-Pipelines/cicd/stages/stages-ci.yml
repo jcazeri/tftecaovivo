@@ -75,6 +75,14 @@ stages:
       - script: |
           terraform workspace select live || terraform workspace new live
         displayName: "Select or create Workspace"
+      
+      - task: TerraformCLI@0
+        displayName: Seleciona Workspace
+        inputs:
+          command: workspace
+          workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
+          workspaceSubCommand: select
+          workspaceName: live
 
       - task: TerraformCLI@0
         displayName: Terraform Plan
