@@ -90,7 +90,7 @@ module "aks" {
   additional_node_pools = var.aks_additional_node_pools
 
   # Identity Configuration
-  is_identity_enabled   = var.aks_is_identity_enabled
+  is_identity_enabled = var.aks_is_identity_enabled
 
   # Network Configuration
   network_plugin                   = var.network_plugin
