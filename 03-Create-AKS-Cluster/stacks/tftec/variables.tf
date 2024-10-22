@@ -240,56 +240,6 @@ variable "aks_is_identity_enabled" {
   description = "Habilitar ou não o uso de identidade gerenciada."
 }
 
-variable "rbac_aad_admin_group_object_ids" {
-  type        = any
-  default     = null
-  description = "Object ID dos grupos com acesso administrativo ao cluster Kubernetes."
-}
-
-variable "rbac_aad_azure_rbac_enabled" {
-  type        = bool
-  default     = null
-  description = "Habilita Role Based Access Control based com Azure AD"
-}
-
-variable "rbac_aad_client_app_id" {
-  type        = string
-  default     = null
-  description = "Client ID da aplicação do Azure Active Directory."
-}
-
-variable "rbac_aad_managed" {
-  type        = bool
-  default     = false
-  nullable    = false
-  description = " Integração com Azure Active Directory, habilitado, significa que o Azure criará/gerenciará a entidade de Serviço usada para integração."
-}
-
-variable "rbac_aad_server_app_id" {
-  type        = string
-  default     = null
-  description = "Server ID do Azure Active Directory Application."
-}
-
-variable "rbac_aad_server_app_secret" {
-  type        = string
-  default     = null
-  description = "Server Secret do Azure Active Directory Application."
-}
-
-variable "rbac_aad_tenant_id" {
-  type        = string
-  default     = null
-  description = "ID do tenant usada para o aplicativo do Azure Active Directory. Se isso não for especificado, a ID do tenant da assinatura atual será utilizado."
-}
-
-variable "role_based_access_control_enabled" {
-  type        = bool
-  default     = false
-  nullable    = false
-  description = "Habilitar Role Based Access Control."
-}
-
 variable "disable_local_account" {
   type        = bool
   default     = true

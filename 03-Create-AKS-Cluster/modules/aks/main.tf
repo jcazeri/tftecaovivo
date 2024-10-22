@@ -56,16 +56,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id       = data.azurerm_subnet.aks_node.id
   }
 
-  dynamic "azure_active_directory_role_based_access_control" {
-    for_each = var.role_based_access_control_enabled && var.rbac_aad_managed ? ["rbac"] : []
-
-    content {
-      admin_group_object_ids = var.rbac_aad_admin_group_object_ids
-      azure_rbac_enabled     = var.rbac_aad_azure_rbac_enabled
-      tenant_id              = var.rbac_aad_tenant_id
-    }
-  }
-
   dynamic "service_principal" {
     for_each = var.is_identity_enabled ? [] : [1]
     content {

@@ -25,37 +25,6 @@ data "azurerm_subnet" "existing_subnet" {
   resource_group_name  = data.azurerm_virtual_network.existing_vnet.resource_group_name
 }
 
-# Azure AD Group in Active Directory for AKS Admins
-
-data "azuread_client_config" "existing" {
-}
-
-resource "azuread_group" "aks_administrators" {
-  display_name            = "${var.aks_resource_group_name}-cluster-administrators"
-  owners                  = [data.azuread_client_config.existing.object_id]
-  security_enabled        = true
-  prevent_duplicate_names = true
-  description             = "Azure AKS Kubernetes administrators for the ${var.aks_resource_group_name}-cluster."
-
-  depends_on = [
-    azurerm_resource_group.aks_rg
-  ]
-}
-
-data "azurerm_subscription" "principal" {
-}
-
-resource "azurerm_role_assignment" "aks_administrators" {
-  scope                = data.azurerm_subscription.principal.id
-  role_definition_name = "Contributor"
-  principal_id         = azuread_group.aks_administrators.object_id
-
-  depends_on = [
-    azurerm_resource_group.aks_rg,
-    azuread_group.aks_administrators
-  ]
-}
-
 # Terraform Modules
 
 # Azure Container Registry Module
@@ -123,10 +92,6 @@ module "aks" {
   # Identity Configuration
   disable_local_account             = var.disable_local_account
   is_identity_enabled               = var.aks_is_identity_enabled
-  role_based_access_control_enabled = var.role_based_access_control_enabled
-  rbac_aad_managed                  = var.rbac_aad_managed
-  rbac_aad_admin_group_object_ids   = [azuread_group.aks_administrators.object_id] # Use object_id
-
 
   # Network Configuration
   network_plugin                   = var.network_plugin
@@ -152,6 +117,5 @@ module "aks" {
     module.acr,
     module.wks_log,
     azurerm_resource_group.aks_rg,
-    azuread_group.aks_administrators
   ]
 }

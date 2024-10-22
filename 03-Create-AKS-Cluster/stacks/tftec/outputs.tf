@@ -12,15 +12,6 @@ output "rg_location" {
   value = var.location
 }
 
-# AAD Outputs
-
-output "azure_ad_group_id" {
-  value = azuread_group.aks_administrators.id
-}
-output "azure_ad_group_objectid" {
-  value = azuread_group.aks_administrators.object_id
-}
-
 # ACR Outputs
 
 output "acr_id" {
