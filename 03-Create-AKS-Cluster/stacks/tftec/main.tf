@@ -90,8 +90,8 @@ module "aks" {
   additional_node_pools = var.aks_additional_node_pools
 
   # Identity Configuration
-  disable_local_account             = var.disable_local_account
-  is_identity_enabled               = var.aks_is_identity_enabled
+  disable_local_account = var.disable_local_account
+  is_identity_enabled   = var.aks_is_identity_enabled
 
   # Network Configuration
   network_plugin                   = var.network_plugin

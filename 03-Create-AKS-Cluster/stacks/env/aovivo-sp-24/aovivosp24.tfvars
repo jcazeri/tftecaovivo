@@ -65,9 +65,9 @@ aks_additional_node_pools = {
   }
 }
 # Identity Configuration
-disable_local_account             = true
-aks_enable_attach_acr             = true
-aks_is_identity_enabled           = true
+disable_local_account   = true
+aks_enable_attach_acr   = true
+aks_is_identity_enabled = true
 # Network Configuration
 network_plugin                   = "azure"
 default_aks_network_cidr         = "11.0.0.0/22"
