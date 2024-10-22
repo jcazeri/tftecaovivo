@@ -1,3 +1,4 @@
+---
 stages:
 - stage: CI_Stage
   variables:
@@ -48,7 +49,7 @@ stages:
         displayName: Terraform Format
         inputs:
           command: 'fmt'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
+          wworkingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
           commandOptions: '-check -diff'
           allowTelemetryCollection: true
 
@@ -56,9 +57,8 @@ stages:
     dependsOn: Terraform_Validate
     displayName: Planejamento do Deploy
     steps:
-      # Inicializa o backend remoto antes de qualquer operação de workspace
       - task: TerraformCLI@0
-        displayName: Terraform Init para Workspace
+        displayName: Terraform Init
         inputs:
           command: 'init'
           workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
@@ -69,13 +69,14 @@ stages:
           backendAzureRmStorageAccountName: '$(TF-BACKEND-STORAGE-ACCOUNT)'
           backendAzureRmContainerName: '$(TF-BACKEND-CONTAINER)'
           backendAzureRmKey: '$(TF-BACKEND-KEY)'
-          allowTelemetryCollection: true
-
-      # Tenta selecionar o workspace existente ou cria se não existir
-      - script: |
-          terraform workspace select live || terraform workspace new live
-        displayName: "Select or Create Workspace"
-      
+          allowTelemetryCollection: true 
+      - task: TerraformCLI@0
+        displayName: Seleciona Workspace
+        inputs:
+          command: workspace
+          workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
+          workspaceSubCommand: new
+          workspaceName: live
       - task: TerraformCLI@0
         displayName: Terraform Plan
         inputs:
@@ -85,3 +86,22 @@ stages:
           commandOptions: '-out=main.tfplan -var-file=../env/aovivo-sp-24/aovivosp24.tfvars'
           allowTelemetryCollection: true
           publishPlanResults: 'Terraform Plan' 
+
+- stage: Validation
+  dependsOn: "CI_Stage"
+  displayName: "Approval Gates"
+  variables:
+    - group: tftec-iac-vars
+  jobs: 
+  - job: EsperaPorValidacao
+    displayName: "Esperando aprovação manual"
+    pool: "server"
+    timeoutInMinutes: "4320" # job times out in 3 days
+    steps:
+    - task: ManualValidation@0
+      timeoutInMinutes: 1440 # task times out in 1 day
+      inputs:
+        notifyUsers: |
+          antonio.junior@solonetwork.com.br
+        instructions: "Pode haver recursos sendo destruídos como parte desta implantação, revise a saída do plano Terraform antes de aprovar."
+        onTimeout: "reject"
