@@ -1,5 +1,5 @@
 #01 - Global Vars
-location  = "eastus"
+location  = "uksouth"
 cx_prefix = "tftec"
 global_tags = {
   ambiente    = "ao vivo sao paulo 2024"
