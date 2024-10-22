@@ -2,10 +2,10 @@ stages:
 - stage: Destroy_Stage
   variables:
     - group: tftec-iac-vars
-  displayName: Destruição da Infraestrutura
+  displayName: Infrastructure Destruction
   jobs:  
   - job: Destroy
-    displayName: Destroy dos Recursos no Ambiente Real
+    displayName: Destroy of Resources in the Real Environment
     steps:
       - task: TerraformCLI@0
         displayName: Terraform Init
@@ -22,7 +22,7 @@ stages:
           allowTelemetryCollection: true
 
       - task: TerraformCLI@0
-        displayName: Seleciona Workspace
+        displayName: Select Workspace
         inputs:
           command: workspace
           workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'

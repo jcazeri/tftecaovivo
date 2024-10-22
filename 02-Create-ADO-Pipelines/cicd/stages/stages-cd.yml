@@ -6,7 +6,7 @@ stages:
   displayName: Continuous Deployment
   jobs:  
   - job: Apply
-    displayName: Deploy dos Recursos no Ambiente Real
+    displayName: Deployment of Resources in the Real Environment
     steps:
       - task: TerraformCLI@0
         displayName: Terraform Init
