@@ -49,7 +49,7 @@ stages:
         displayName: Terraform Format
         inputs:
           command: 'fmt'
-          wworkingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
           commandOptions: '-check -diff'
           allowTelemetryCollection: true
 
@@ -70,20 +70,12 @@ stages:
           backendAzureRmContainerName: '$(TF-BACKEND-CONTAINER)'
           backendAzureRmKey: '$(TF-BACKEND-KEY)'
           allowTelemetryCollection: true 
-      - task: TerraformCLI@0
-        displayName: Cria Workspace
-        inputs:
-          command: workspace
-          workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
-          workspaceSubCommand: new
-          workspaceName: live
-      - task: TerraformCLI@0
-        displayName: Seleciona Workspace
-        inputs:
-          command: workspace
-          workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
-          workspaceSubCommand: select
-          workspaceName: live
+
+      # Tenta selecionar o workspace existente ou cria se não existir
+      - script: |
+          terraform workspace select live || terraform workspace new live
+        displayName: "Seleciona ou Cria Workspace"
+
       - task: TerraformCLI@0
         displayName: Terraform Plan
         inputs:
