@@ -21,13 +21,12 @@ stages:
           backendAzureRmContainerName: '$(TF-BACKEND-CONTAINER)'
           backendAzureRmKey: '$(TF-BACKEND-KEY)'
           allowTelemetryCollection: true
-      - task: TerraformCLI@0
-        displayName: Seleciona Workspace
-        inputs:
-          command: workspace
-          workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
-          workspaceSubCommand: select
-          workspaceName: live
+
+      # Adiciona a criação do workspace se ele não existir
+      - script: |
+          terraform workspace select live || terraform workspace new live
+        displayName: "Select or create Workspace"
+
       - task: TerraformCLI@0
         displayName: Terraform Apply
         inputs:
@@ -35,4 +34,4 @@ stages:
           environmentServiceName: 'tftec-devops'
           workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
           commandOptions: '--var-file="../env/aovivo-sp-24/aovivosp24.tfvars"'
-          allowTelemetryCollection: true        
+          allowTelemetryCollection: true
