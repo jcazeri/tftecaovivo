@@ -240,12 +240,6 @@ variable "aks_is_identity_enabled" {
   description = "Habilitar ou não o uso de identidade gerenciada."
 }
 
-variable "disable_local_account" {
-  type        = bool
-  default     = true
-  description = "Desabilita o acesso ao cluster com usuários locais."
-}
-
 variable "sku_tier" {
   type        = string
   default     = "Free"

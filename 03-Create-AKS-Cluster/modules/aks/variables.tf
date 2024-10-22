@@ -279,12 +279,6 @@ variable "private_cluster_enabled" {
   description = "Habilita que o cluster teha suas APIs dipostas somente para a rede interna"
 }
 
-variable "disable_local_account" {
-  type        = bool
-  default     = true
-  description = "Desabilita o acesso ao cluster com usuários locais."
-}
-
 variable "microsoft_defender_enabled" {
   type        = bool
   default     = false

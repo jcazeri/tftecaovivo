@@ -65,7 +65,6 @@ aks_additional_node_pools = {
   }
 }
 # Identity Configuration
-disable_local_account   = true
 aks_enable_attach_acr   = true
 aks_is_identity_enabled = true
 # Network Configuration

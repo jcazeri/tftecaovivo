@@ -32,7 +32,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location                         = var.location == null ? data.azurerm_resource_group.aks.location : var.location
   sku_tier                         = var.sku_tier
   kubernetes_version               = var.k8s_version
-  local_account_disabled           = var.disable_local_account
   http_application_routing_enabled = var.http_application_routing_enabled
   private_cluster_enabled          = var.private_cluster_enabled
   azure_policy_enabled             = var.azure_policy_enabled
