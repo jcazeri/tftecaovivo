@@ -152,6 +152,6 @@ module "aks" {
     module.acr,
     module.wks_log,
     azurerm_resource_group.aks_rg,
-    azuread_group.aks_administrators
+  # azuread_group.aks_administrators
   ]
 }
