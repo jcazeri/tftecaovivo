@@ -74,7 +74,7 @@ stages:
       # Tenta selecionar o workspace existente ou cria se não existir
       - script: |
           terraform workspace select live || terraform workspace new live
-        displayName: "Seleciona ou Cria Workspace"
+        displayName: "Select or create Workspace"
 
       - task: TerraformCLI@0
         displayName: Terraform Plan
