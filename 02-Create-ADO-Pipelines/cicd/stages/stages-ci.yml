@@ -71,6 +71,13 @@ stages:
           backendAzureRmKey: '$(TF-BACKEND-KEY)'
           allowTelemetryCollection: true 
       - task: TerraformCLI@0
+        displayName: Cria Workspace
+        inputs:
+          command: workspace
+          workingDirectory: '$(System.DefaultWorkingDirectory)/03-Create-AKS-Cluster/stacks/tftec'
+          workspaceSubCommand: new
+          workspaceName: live
+      - task: TerraformCLI@0
         displayName: Seleciona Workspace
         inputs:
           command: workspace
