@@ -88,14 +88,3 @@ az keyvault secret set --vault-name $env:KEY_VAULT_NAME --name "ARM-SUBSCRIPTION
 az keyvault secret set --vault-name $env:KEY_VAULT_NAME --name "TF-BACKEND-RESOURCE-GROUP" --value $env:TF_BACKEND_RESOURCE_GROUP
 az keyvault secret set --vault-name $env:KEY_VAULT_NAME --name "TF-BACKEND-CONTAINER" --value $env:TF_BACKEND_CONTAINER
 ```
-
-### Terraform initialization with backend configuration
-```powershell
-terraform init -reconfigure `
-  -backend-config "resource_group_name=$env:TF_BACKEND_RESOURCE_GROUP" `
-  -backend-config "storage_account_name=$env:TF_BACKEND_STORAGE_ACCOUNT" `
-  -backend-config "container_name=$env:TF_BACKEND_CONTAINER" `
-  -backend-config "key=$env:TF_BACKEND_KEY" `
-  -backend-config "subscription_id=$env:ARM_SUBSCRIPTION_ID" `
-  -backend-config "access_key=$env:ACCESS_KEY"
-```
