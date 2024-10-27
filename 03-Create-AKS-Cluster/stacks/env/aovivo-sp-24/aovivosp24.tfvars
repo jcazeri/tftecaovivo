@@ -14,9 +14,9 @@ analytics_resource_group_name = "analytics"
 
 
 #03 - VNET Vars
-vnet_name                = "vnet-web"
-vnet_resource_group_name = "rg-tftecsp-dev"
-snet_name                = "sub-aks02"
+vnet_name                = "vnet-spk-001"
+vnet_resource_group_name = "rg-tftecsp-001"
+snet_name                = "sub-aks-001"
 
 
 #04 - AKS Vars
